@@ -7,11 +7,13 @@ package com.exavalu.models;
 import com.exavalu.services.DepartmentService;
 import com.exavalu.services.EmployeeService;
 import com.exavalu.services.RoleService;
+import com.exavalu.utils.log4jExample;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -74,6 +76,8 @@ public class Employee extends ActionSupport implements ApplicationAware, Session
         } else {
             String errorMsg ="Somehting Went is Wrong Try Again!!!";
             sessionMap.put("ErrorMsg2", errorMsg);
+//            Logger log = Logger.getLogger(log4jExample.class.getName());
+//           log.error(errorMsg);
             System.out.println("returning Failure from doAddEmployeeData method");
         }
 

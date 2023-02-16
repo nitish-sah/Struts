@@ -14,7 +14,7 @@
         </action>    
         <action name="Signup" class="com.exavalu.models.Users" method="doSignUp">
             <result name="SUCCESS">login.jsp</result>
-            <result name="FAILURE">signup.jsp</result>
+            <result name="FAILURE">bodyForLandingPage.jsp</result>
         </action> 
         <action name="AddEmployee" class="com.exavalu.models.Employee" method="doAddEmployeeData">
             <result name="SUCCESS">employeeDetails.jsp</result>
@@ -39,6 +39,7 @@
             <result name="PROVINCELIST">statelist.jsp</result>  
             <result name="DISTRICTLIST">districtlist.jsp</result> 
             <result name="DONE" type="redirect">login.jsp</result>  
+            <result name="FAIL">bodyForLandingPage.jsp</result>  
         </action>
         <action name="ApiFetch" class="com.exavalu.models.Users" method="apiCall">
             <result name="SUCCESS">login.jsp</result>

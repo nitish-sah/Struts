@@ -11,7 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 public class EmployeeService {
     
     public static EmployeeService employeeService = null;
+    public static Logger log = Logger.getLogger(EmployeeService.class.getName());
+
     
     public static EmployeeService getInstance()
     {
@@ -67,7 +71,11 @@ public class EmployeeService {
             
         }
         catch (SQLException ex) {
-            ex.printStackTrace();
+            log.error(LocalDateTime.now()+"Error code: "+ex.getErrorCode()+"returning Failure from getallemployee method");
+            System.out.println("returning Failure from Login method");
+
+          ex.printStackTrace();
+          
         }
         System.err.println("Total rows:"+empList.size());
         return empList;
@@ -100,6 +108,8 @@ public class EmployeeService {
             }
 
         } catch (SQLException ex) {
+            log.error(LocalDateTime.now()+"Error code: "+ex.getErrorCode()+"returning Failure from addEmployee meathod");
+           
             ex.printStackTrace();
         }
 
@@ -152,6 +162,8 @@ public class EmployeeService {
             }
 
         } catch (SQLException ex) {
+             log.error(LocalDateTime.now()+"Error code: "+ex.getErrorCode()+"returning Failure from showSearchEmployee meathod");
+
             ex.printStackTrace();
         }
 
@@ -184,6 +196,8 @@ public class EmployeeService {
             }
 
         } catch (SQLException ex) {
+             log.error(LocalDateTime.now()+"Error code: "+ex.getErrorCode()+"returning Failure from getEmployee meathod");
+
             ex.printStackTrace();
         }
 
@@ -224,6 +238,7 @@ public class EmployeeService {
             }
 
         } catch (SQLException ex) {
+            log.error(LocalDateTime.now()+" Sql Error :"+ex.getErrorCode()+"error in edit employee method"+EmployeeService.class.getName());
             ex.printStackTrace();
         }
         return result;

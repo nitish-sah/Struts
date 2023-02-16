@@ -6,16 +6,22 @@ package com.exavalu.services;
 
 import com.exavalu.models.Users;
 import com.exavalu.utils.JDBCConnectionManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.apache.log4j.Logger;
 
 
 public class LoginService {
+    
 
     public static LoginService loginService = null;
+    public static Logger log = Logger.getLogger(LoginService.class.getName());
+
 
     private LoginService() {
     }
@@ -48,6 +54,10 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
+            
+             log.error("Not Found");
+             System.out.println(ex.getErrorCode());
+
             ex.printStackTrace();
         }
 
@@ -82,6 +92,9 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
+            int e = ex.getErrorCode();
+            log.error(LocalDateTime.now()+"Sql Error :"+e+" Duplicate Email Address");
+            System.out.println(LocalDateTime.now()+"error code:"+e+"Duplicate Email Address" );
             ex.printStackTrace();
         }
         return result;
@@ -110,7 +123,6 @@ public class LoginService {
         return user;
     }
 
-   
 
     public boolean doSignUpAll(ArrayList userList) {
         boolean result = true;

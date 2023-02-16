@@ -9,11 +9,14 @@ import com.exavalu.services.DistrictService;
 import com.exavalu.services.EmployeeService;
 import com.exavalu.services.LoginService;
 import com.exavalu.services.StateService;
+import com.exavalu.utils.log4jExample;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -45,6 +48,41 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     private String countryCode;
     private String stateCode;
     private String distCode;
+    
+            public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+
+    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
 
     public String getCountryCode() {
         return countryCode;
@@ -89,8 +127,10 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
             sessionMap.put("EmpList", empList);
             result = "SUCCESS";
         } else {
-            String errorMsg ="Either Email Address or Password is Wrong";
+            String errorMsg ="Either email orPassword is Wrong";
             sessionMap.put("ErrorMsg", errorMsg);
+            Logger log = Logger.getLogger(log4jExample.class.getName());
+           log.error(errorMsg+" "+LocalDateTime.now());
             System.out.println("returning Failure from doLogin method");
         }
 
@@ -153,6 +193,8 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
                 result = "DONE";
                 sessionMap.put("SuccessSignUp", "Successfully Registered");
 
+            }else{
+                result="FAIL";
             } 
             System.out.println(sessionMap);
             return result;
@@ -170,39 +212,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
     
     
     
-        public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-
-    
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     
     public String apiCall() throws Exception {
@@ -221,17 +230,6 @@ public class Users extends ActionSupport implements ApplicationAware, SessionAwa
         return result;
 
     }
-    public String getAllEmployee() throws Exception {
-        String result = "SUCCESS";
-        
-        return result;
-
-    }
-     public String home() throws Exception {
-        String result = "SUCCESS";
-        
-        return result;
-
-    }
+    
 
 }
